@@ -20,7 +20,11 @@ public class CubeMovement : MonoBehaviour
     public float speed = 0.01f;
 
     private bool input = true;
-          
+
+    public List<GameObject> controlPoints = new List<GameObject>();
+    
+    // 4 raycasts des côtés
+
     // Start is called before the first frame update
     void Start()
     {
