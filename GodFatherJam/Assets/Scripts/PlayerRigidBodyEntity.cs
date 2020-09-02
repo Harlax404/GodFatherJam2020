@@ -10,6 +10,9 @@ public class PlayerRigidBodyEntity : MonoBehaviour
     public float movementForce = 15f;
     public float upforce = 10f;
 
+    private float xdir = 0f;
+    private float ydir = 0f;
+
     public Transform[] sommet;
     private Transform _highSommet;
     #endregion
@@ -25,18 +28,20 @@ public class PlayerRigidBodyEntity : MonoBehaviour
         _gm = GameManager.Instance;
     }
 
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         _highSommet = sommet[GetHighSommet()];
+        if (Mathf.Abs(xdir) > 0.1f || Mathf.Abs(ydir) > 0.1f)
+        {
+            _rigidbody.AddForceAtPosition(new Vector3(movementForce * xdir, upforce, movementForce * ydir), _highSommet.position);
+        }
     }
 
     public void Move(float x, float y)
     {
-        if (x != 0 || y != 0)
-        {
-            _rigidbody.AddForceAtPosition(new Vector3(movementForce * x, upforce, movementForce * y), _highSommet.position);
-        }
+        xdir = x;
+        ydir = y;
     }
 
     int GetHighSommet()
