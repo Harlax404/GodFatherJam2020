@@ -19,21 +19,41 @@ public class TestPostPro : MonoBehaviour
     private DepthOfField PPField;
     private Bloom PPBloom;
 
+    [SerializeField]
+    private AudioClip PoliceSirens;
+    private AudioSource JudgementSource;
+
     void Start()
     {
-        PostProcessVolume volume = gameObject.GetComponent<PostProcessVolume>();
+        GameObject VolumeHolder = Camera.main.gameObject;
+
+        PostProcessVolume volume = VolumeHolder.GetComponent<PostProcessVolume>();
         PPVignette = volume.profile.GetSetting<Vignette>();
         PPField = volume.profile.GetSetting<DepthOfField>();
         PPBloom = volume.profile.GetSetting<Bloom>();
+
+        JudgementSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.Space) && PPIntesity < MaxIntensity)
+        if(Input.GetKey(KeyCode.UpArrow) && PPIntesity < MaxIntensity)
         {
             PPIntesity += 0.01f;
-            UpdatePostProcess(PPIntesity);
+            IshIsh();
         }
+
+        if (Input.GetKey(KeyCode.DownArrow) && PPIntesity > 0)
+        {
+            PPIntesity -= 0.01f;
+            IshIsh();
+        }
+    }
+
+    private void IshIsh()
+    {
+        UpdatePostProcess(PPIntesity);
+        PlaySirens(PPIntesity);
     }
 
     private void UpdatePostProcess(float ModifIntensity)
@@ -41,5 +61,13 @@ public class TestPostPro : MonoBehaviour
         PPVignette.intensity.value = ModifIntensity * VignetteMod;
         PPField.focalLength.value = ModifIntensity * FieldMod;
         PPBloom.intensity.value = ModifIntensity * BloomMod;
+    }
+
+    private void PlaySirens(float ModifIntensity)
+    {
+        JudgementSource.volume = ModifIntensity; 
+
+        if(JudgementSource.isPlaying == false)
+        JudgementSource.PlayOneShot(PoliceSirens);
     }
 }
