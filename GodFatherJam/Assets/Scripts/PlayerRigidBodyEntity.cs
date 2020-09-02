@@ -26,16 +26,15 @@ public class PlayerRigidBodyEntity : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         _highSommet = sommet[GetHighSommet()];
     }
 
     public void Move(float x, float y)
     {
-        if (x!=0 || y != 0)
+        if (x != 0 || y != 0)
         {
-            //_rigidbody.AddForce(movementForce * x, upforce, movementForce * y);
             _rigidbody.AddForceAtPosition(new Vector3(movementForce * x, upforce, movementForce * y), _highSommet.position);
         }
     }
