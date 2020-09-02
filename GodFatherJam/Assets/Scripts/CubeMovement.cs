@@ -115,45 +115,51 @@ public class CubeMovement : MonoBehaviour
 
             //new Vector3(controlPoints[i2].transform.position.x - transform.position.x, controlPoints[i2].transform.position.y - transform.position.y, controlPoints[i2].transform.position.z - transform.position.z);
 
-            
+
 
             // While the cube isn't at the control point's position
             //while (controlPoints[i2].transform.position != transform.position || ((offset.x < 0.01 && offset.x > -0.01) && (offset.y < 0.01 && offset.y > -0.01) && (offset.z < 0.01 && offset.z > -0.01)))
-            while (offset.sqrMagnitude >= 0.1)
+            Debug.Log(offset.sqrMagnitude);
+            Debug.Log(offset.magnitude);
+
+            while (offset.sqrMagnitude >= 0.5)
             {
-                Debug.Log("goes in");
+                
+                //Debug.Log("goes in");
                 if (controlPoints[i2].tag == "Up")
                 {
-                    Debug.Log("goes up");
+                    //Debug.Log("goes up");
                     StartCoroutine("moveUp");
                 }
 
                 if (controlPoints[i2].tag == "Down")
                 {
-                    Debug.Log("goes down");
+                    //Debug.Log("goes down");
                     StartCoroutine("moveDown");
                    
                 }
 
                 if (controlPoints[i2].tag == "Left")
                 {
-                    Debug.Log("goes left");
+                    //Debug.Log("goes left");
                     StartCoroutine("moveLeft");
                 }
 
                 if (controlPoints[i2].tag == "Right")
                 {
-                    Debug.Log("goes right");
+                    //Debug.Log("goes right");
                     StartCoroutine("moveRight");
                 }
 
+                yield return new WaitForSeconds(0.5f);
+
                 offset = controlPoints[i2].transform.position - transform.position;
                 Debug.Log(offset.sqrMagnitude);
-                yield return new WaitForSeconds(0.5f);
+                Debug.Log(offset.magnitude);
             }
 
 
-            Debug.Log("goes out");
+            //Debug.Log("goes out");
         }
         StartCoroutine("Pathing");
        
