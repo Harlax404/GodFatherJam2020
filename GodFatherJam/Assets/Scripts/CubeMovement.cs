@@ -16,10 +16,13 @@ public class CubeMovement : MonoBehaviour
     public GameObject right;
     public GameObject left;
 
+    public BoxCollider cubeCollider;
+    public SphereCollider cubeVisionCollider;
     public int step = 9;
 
-    public float speed = 0.01f;
-    public float speed2 = 1.0f;
+    public float rotationSpeed = 0.01f;
+    public float cubeSpeed = 1.0f;
+    public float collisionForce = 5;
 
     [SerializeField]
     private List<GameObject> controlPoints = new List<GameObject>();
@@ -31,23 +34,26 @@ public class CubeMovement : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    void OnCollisionEnter(Collision c)
+    {
+        // force is how forcefully we will push the player away from the enemy.
+       
+
+        // If the object we hit is the enemy
+        if (c.gameObject.tag == "Player")
+        {
+            // Calculate Angle Between the collision point and the player
+            Vector3 dir = c.contacts[0].point - transform.position;
+            // We then get the opposite (-Vector3) and normalize it
+            dir = -dir.normalized;
+            // And finally we add force in the direction of dir and multiply it by force. 
+            // This will push back the player
+            GetComponent<Rigidbody>().AddForce(dir * collisionForce);
+        }
+    }
     void FixedUpdate()
     {
-        /*if (!Physics.Linecast(transform.position, controlPoints[0].transform.position))
-        {
-            //StartCoroutine("moveRight");
-            transform.position = Vector3.MoveTowards(transform.position, controlPoints[0].transform.position, Time.deltaTime * speed2);
-            Debug.Log("Go 0");
-            if(transform.position == controlPoints[0].transform.position)
-            {
 
-                Debug.Log("Stop");
-            }
-        }*/
-
-        
-    
     }
 
     IEnumerator moveUp()
@@ -56,7 +62,7 @@ public class CubeMovement : MonoBehaviour
         for (int i = 0; i < (90 / step); i++)
         {
             entity.transform.RotateAround(up.transform.position, Vector3.right, step);
-            yield return new WaitForSeconds(speed);
+            yield return new WaitForSeconds(rotationSpeed);
         }
         
 
@@ -72,7 +78,7 @@ public class CubeMovement : MonoBehaviour
         for (int i = 0; i < (90 / step); i++)
         {
             entity.transform.RotateAround(down.transform.position, Vector3.left, step);
-            yield return new WaitForSeconds(speed);
+            yield return new WaitForSeconds(rotationSpeed);
         }
         center.transform.position = entity.transform.position;
 
@@ -84,7 +90,7 @@ public class CubeMovement : MonoBehaviour
         for (int i = 0; i < (90 / step); i++)
         {
             entity.transform.RotateAround(left.transform.position, Vector3.forward, step);
-            yield return new WaitForSeconds(speed);
+            yield return new WaitForSeconds(rotationSpeed);
         }
         center.transform.position = entity.transform.position;
 
@@ -96,7 +102,7 @@ public class CubeMovement : MonoBehaviour
         for (int i = 0; i < (90 / step); i++)
         {
             entity.transform.RotateAround(right.transform.position, Vector3.back, step);
-            yield return new WaitForSeconds(speed);
+            yield return new WaitForSeconds(rotationSpeed);
         }
         center.transform.position = entity.transform.position;
 
@@ -151,7 +157,7 @@ public class CubeMovement : MonoBehaviour
                     StartCoroutine("moveRight");
                 }
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(cubeSpeed);
 
                 offset = controlPoints[i2].transform.position - transform.position;
                 Debug.Log(offset.sqrMagnitude);
@@ -164,4 +170,5 @@ public class CubeMovement : MonoBehaviour
         StartCoroutine("Pathing");
        
     }
+    
 }
