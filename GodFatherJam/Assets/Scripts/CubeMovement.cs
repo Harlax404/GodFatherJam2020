@@ -42,11 +42,11 @@ public class CubeMovement : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider c)
-    {    
-
+    {
+        //Debug.Log("A touché");
         if (c.gameObject.tag == "Player")
         {
-            Debug.Log("OncollisionEnter");
+            //Debug.Log("C'est le joueur");
             gm.alarmMode = true;
             Vector3 dir = c.gameObject.transform.position - transform.position;
             dir.y = 0.1f;
