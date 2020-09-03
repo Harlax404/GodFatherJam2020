@@ -13,16 +13,19 @@ public class Mirador : MonoBehaviour
 
     private float timer = 0f;
 
-    public bool inAlert = false;
+    private bool inAlert = false;
+    private bool alreadyAlert = false;
+
     public float durationToLookAtPlayer = 5f;
     public float timeToLookAtPlayer = 0.5f;
     public Transform player;
 
-    public bool test = false;
+    private GameManager gm; // pour récup arlarmMode
 
     // Start is called before the first frame update
     void Start()
     {
+        gm = GameManager.Instance;
         from = transform.rotation;
         current = transform.rotation;
         to = transform.rotation;
@@ -32,14 +35,15 @@ public class Mirador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        inAlert = gm.alarmMode;
         if (!inAlert)
         {
             timer += Time.deltaTime * speed;
             transform.rotation = Quaternion.Lerp(from, to, Mathf.PingPong(timer, 1));
         }
-        if (test)
+        else if (!alreadyAlert)
         {
-            test = false;
+            alreadyAlert = true;
             StartAlerMode(); 
         }
     }
@@ -68,8 +72,8 @@ public class Mirador : MonoBehaviour
             elapsed2 += Time.deltaTime;
             yield return null;
         }
-
         inAlert = false;
+        alreadyAlert = false;
     }
 
     void StartAlerMode()
