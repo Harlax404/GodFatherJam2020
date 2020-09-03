@@ -22,18 +22,20 @@ public class CubeMovement : MonoBehaviour
 
     public float rotationSpeed = 0.01f;
     public float cubeSpeed = 1.0f;
-    public float alarmDuration = 3.0f;
+    public float alarmDuration;
+    public bool isAlarmModeEnabled = true;
     public float collisionForce = 5;
 
     private GameManager gm;
 
     [SerializeField]
     private List<GameObject> controlPoints = new List<GameObject>();
-
+    private GameObject[] cubeArray;
     // Start is called before the first frame update
     void Start()
     {
         gm = GameManager.Instance;
+      
 
         StartCoroutine("Pathing");
         
@@ -117,19 +119,7 @@ public class CubeMovement : MonoBehaviour
         // for each control point in the list
         for(int i2 = 0; i2 <= (controlPoints.Count - 1); i2++)
         {
-            Debug.Log(i2);
-
-
             Vector3 offset = controlPoints[i2].transform.position - transform.position;
-
-            //new Vector3(controlPoints[i2].transform.position.x - transform.position.x, controlPoints[i2].transform.position.y - transform.position.y, controlPoints[i2].transform.position.z - transform.position.z);
-
-
-
-            // While the cube isn't at the control point's position
-            //while (controlPoints[i2].transform.position != transform.position || ((offset.x < 0.01 && offset.x > -0.01) && (offset.y < 0.01 && offset.y > -0.01) && (offset.z < 0.01 && offset.z > -0.01)))
-            Debug.Log(offset.sqrMagnitude);
-            Debug.Log(offset.magnitude);
 
             while (offset.sqrMagnitude >= 0.5)
             {
@@ -163,8 +153,6 @@ public class CubeMovement : MonoBehaviour
                 yield return new WaitForSeconds(cubeSpeed);
 
                 offset = controlPoints[i2].transform.position - transform.position;
-                Debug.Log(offset.sqrMagnitude);
-                Debug.Log(offset.magnitude);
             }
 
 
@@ -176,27 +164,33 @@ public class CubeMovement : MonoBehaviour
 
     IEnumerator alarmMode()
     {
-        // Everything that is alarm-related goes here
-        GameObject[] cubeArray = GameObject.FindGameObjectsWithTag("Enemy");
-
-        Color actualColor = cubeArray[0].GetComponent<Renderer>().material.color;
-
-        foreach (GameObject cube in cubeArray)
+        if(isAlarmModeEnabled)
         {
-            cube.GetComponent<Renderer>().material.color = new Color(1,0,0);
-            cube.GetComponent<CubeMovement>().cubeSpeed *= 1.25f; 
+            Debug.Log("in alarm");
+            // Everything that is alarm-related goes here
+            
+
+            Color actualColor = cubeArray[0].GetComponent<Renderer>().material.color;
+
+            foreach (GameObject cube in cubeArray)
+            {
+                cube.GetComponent<Renderer>().material.color = new Color(1, 0, 0);
+                cube.GetComponent<CubeMovement>().cubeSpeed /= 3.0f;
+            }
+
+
+
+            yield return new WaitForSeconds(alarmDuration);
+
+            foreach (GameObject cube in cubeArray)
+            {
+                cube.GetComponent<Renderer>().material.color = actualColor;
+                cube.GetComponent<CubeMovement>().cubeSpeed *= 3.0f;
+            }
+
+            gm.alarmMode = false;
         }
-
-
-
-        yield return new WaitForSeconds(alarmDuration);
-
-        foreach (GameObject cube in cubeArray)
-        {
-            cube.GetComponent<Renderer>().material.color = actualColor;
-        }
-
-        gm.alarmMode = false;
+       
     }
     
 }

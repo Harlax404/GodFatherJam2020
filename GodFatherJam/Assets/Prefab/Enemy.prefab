@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4781029529058185468}
   - component: {fileID: 4781029529058185469}
+  - component: {fileID: 686641564569499573}
   m_Layer: 0
   m_Name: Cube_Collider
   m_TagString: Untagged
@@ -44,6 +45,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3.9138818
   m_Center: {x: 0.19602776, y: 0.50114965, z: 0}
+--- !u!114 &686641564569499573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4781029529058185471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750bf2e2b18816a4083b74ea4273a2a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startColor: {r: 0.65882355, g: 0.6313726, b: 0.5529412, a: 0}
+  endColor: {r: 1, g: 0, b: 0, a: 0}
+  playerPos: {x: 0, y: 0, z: 0}
 --- !u!1 &4781029529329808657
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4781029529329808662}
   m_Layer: 0
-  m_Name: Ennemy
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,7 +364,8 @@ MonoBehaviour:
   step: 9
   rotationSpeed: 0.01
   cubeSpeed: 1
-  alarmDuration: 3
+  alarmDuration: 6
+  isAlarmModeEnabled: 1
   collisionForce: 5
   controlPoints:
   - {fileID: 0}
