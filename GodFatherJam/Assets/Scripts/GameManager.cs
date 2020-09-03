@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenuUI;
 
     public bool alarmMode = false;
+    public float alarmDuration = 5f;
     #endregion
 
     public void PlayPause()
