@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6232571158714487373}
   - component: {fileID: 6232571158714487374}
   m_Layer: 0
-  m_Name: JudgementManager
+  m_Name: BaptistePostProcess
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   BloomMod: 25
   MaxIntensity: 1
   PoliceSirens: {fileID: 8300000, guid: b4bae4f610cf22343ab3834fcf1615ad, type: 3}
+  HeartBeat: {fileID: 8300000, guid: ee2b00cd4d732a14a87468105673e3d9, type: 3}
 --- !u!82 &6232571158714487374
 AudioSource:
   m_ObjectHideFlags: 0
