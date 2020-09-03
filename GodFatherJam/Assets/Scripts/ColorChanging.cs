@@ -21,7 +21,7 @@ public class ColorChanging : MonoBehaviour
     
     void Update()
     {
-        //distance = Vector3.Distance(cubePos.position, playerPos.position);
+        distance = Vector3.Distance(cubePos.position, playerPos.position);
         //Debug.Log(distance);
     }
 
