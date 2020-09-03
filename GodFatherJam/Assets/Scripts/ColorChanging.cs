@@ -6,13 +6,14 @@ public class ColorChanging : MonoBehaviour
 {
     public Color startColor;
     public Color endColor;
+
     public Renderer rendCube;
-    public Transform playerPos;
+    private Transform playerPos;
     public Transform cubePos;
     private float distance;
 
     private float lerp = 0.0f;
-    private Transform playerTransform;
+    //private Transform playerTransform;
     private Vector3 playerPosition;
     private float maxDistance;
     private float minDistance = 1.9f;
@@ -23,7 +24,7 @@ public class ColorChanging : MonoBehaviour
     {
         gm = GameManager.Instance;
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
-        playerTransform = playerPos.GetChild(0).transform;
+        //playerTransform = playerPos.GetChild(0).transform;
         maxDistance = GetComponent<SphereCollider>().radius;
 
         minDistance = gameObject.GetComponentInParent<BoxCollider>().size.x;
@@ -33,7 +34,7 @@ public class ColorChanging : MonoBehaviour
 
     void Update()
     {
-        playerPosition = playerTransform.position;
+        playerPosition = playerPos.position;
         distance = Vector3.Distance(cubePos.position, playerPosition);
 
         if (gm.alarmMode)
