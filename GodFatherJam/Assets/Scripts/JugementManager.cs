@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorChanging : MonoBehaviour
+public class JugementManager : MonoBehaviour
 {
-    public Color startColor;
-    public Color endColor;
-    
+    [SerializeField]
+    private float borneMinJudgement;
+    [SerializeField]
+    private float borneMaxJudgement;
+    private GameObject postProcessGo;
+
     public Transform playerPos;
     public Transform cubePos;
     private float distance;
@@ -22,15 +25,16 @@ public class ColorChanging : MonoBehaviour
     void Start()
     {
         gm = GameManager.Instance;
+        postProcessGo = GameObject.Find("BaptistePostProcess");
 
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+
+        // Transform du player
         playerTransform = playerPos.GetChild(0).transform;
 
         minDistance = gameObject.GetComponentInParent<BoxCollider>().size.x;
         maxDistance = GetComponent<SphereCollider>().radius;
-
     }
-
 
     void Update()
     {
@@ -39,12 +43,14 @@ public class ColorChanging : MonoBehaviour
 
         if (gm.alarmMode)
         {
-            lerp = 1;
+            // Jugement à 1 en lerp
+            postProcessGo.GetComponent<TestPostPro>().PPIntesity = Mathf.Lerp(borneMaxJudgement, 1.0f, lerp);
         }
         else
         {
             if (distance > maxDistance)
             {
+                //jugement à 0
                 lerp = 0;
             }
             else if (distance <= 1)
@@ -56,7 +62,9 @@ public class ColorChanging : MonoBehaviour
                 lerp = 1 - ((distance - minDistance) / (maxDistance - minDistance));
             }
         }
+        Debug.Log(lerp);
         
-        cubePos.GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, lerp);
+        postProcessGo.GetComponent<TestPostPro>().PPIntesity = Mathf.Lerp(borneMinJudgement, borneMaxJudgement, lerp);
+        postProcessGo.GetComponent<TestPostPro>().IshIsh();
     }
 }

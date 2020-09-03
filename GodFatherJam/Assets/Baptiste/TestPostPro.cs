@@ -52,8 +52,9 @@ public class TestPostPro : MonoBehaviour
         }
     }
 
-    private void IshIsh()
+    public void IshIsh()
     {
+        Debug.Log("rentre dans ISH ISH");
         UpdatePostProcess(PPIntesity);
         PlaySirens(PPIntesity);
     }

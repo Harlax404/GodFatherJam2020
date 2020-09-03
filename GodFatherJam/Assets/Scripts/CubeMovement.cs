@@ -22,12 +22,12 @@ public class CubeMovement : MonoBehaviour
 
     public float rotationSpeed = 0.01f;
     public float cubeSpeed = 1.0f;
-    public float alarmDuration;
     public bool isAlarmModeEnabled = true;
     public float collisionForce = 5;
+    private float alarmDuration;
 
     private GameManager gm;
-    private bool hitOnce = false;
+    public static bool hitOnce = false;
 
     [SerializeField]
     private List<GameObject> controlPoints = new List<GameObject>();
@@ -36,7 +36,7 @@ public class CubeMovement : MonoBehaviour
     void Start()
     {
         gm = GameManager.Instance;
-      
+        alarmDuration = gm.alarmDuration;
 
         StartCoroutine("Pathing");
         
@@ -45,9 +45,9 @@ public class CubeMovement : MonoBehaviour
     void OnTriggerEnter(Collider c)
     {
         //Debug.Log("A touché");
-        if (c.gameObject.tag == "Player" && !hitOnce)
+        if (c.gameObject.tag == "Player")
         {
-            hitOnce = true;
+            
             //Debug.Log("C'est le joueur");
             gm.alarmMode = true;
             Vector3 dir = c.gameObject.transform.position - transform.position;
@@ -57,8 +57,13 @@ public class CubeMovement : MonoBehaviour
             Debug.Log(dir);
             c.gameObject.GetComponent<Rigidbody>().AddForce(dir * collisionForce);
             //GetComponent<Rigidbody>().AddForce(dir * collisionForce);
+            if(!hitOnce)
+            {
+                hitOnce = true;
+                StartCoroutine("alarmMode");
+            }
+            
 
-            StartCoroutine("alarmMode");
         }
     }
 
