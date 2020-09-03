@@ -5,7 +5,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class TestPostPro : MonoBehaviour
 {
-    private float PPIntesity;
+    public float PPIntesity;
     [SerializeField]
     private float VignetteMod = 1;
     [SerializeField]
@@ -71,7 +71,7 @@ public class TestPostPro : MonoBehaviour
 
         if(!JudgementSource.isPlaying)
         {
-            JudgementSource.PlayOneShot(PoliceSirens);
+            //JudgementSource.PlayOneShot(PoliceSirens);
             JudgementSource.PlayOneShot(HeartBeat);
         }
 
