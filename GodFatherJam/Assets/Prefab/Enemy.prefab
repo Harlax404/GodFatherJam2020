@@ -60,8 +60,7 @@ MonoBehaviour:
   startColor: {r: 0.65882355, g: 0.6313726, b: 0.5529412, a: 0}
   endColor: {r: 1, g: 0, b: 0, a: 0}
   rendCube: {fileID: 4781029530610402369}
-  playerPos: {fileID: 1468760294434707351, guid: 1fdc9a14e42be3843a90597d503268d4,
-    type: 3}
+  playerPos: {fileID: 0}
   cubePos: {fileID: 4781029530610402375}
 --- !u!1 &4781029529329808657
 GameObject:

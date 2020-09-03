@@ -11,52 +11,51 @@ public class ColorChanging : MonoBehaviour
     public Transform cubePos;
     private float distance;
 
-    private float MaxDistance;
-    
+    private float lerp = 0.0f;
+    private Transform playerTransform;
+    private Vector3 playerPosition;
+    private float maxDistance;
+    private float minDistance = 1.9f;
+
+    private GameManager gm;
+
     void Start()
     {
-        MaxDistance = GetComponent<SphereCollider>().radius;
+        gm = GameManager.Instance;
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = playerPos.GetChild(0).transform;
+        maxDistance = GetComponent<SphereCollider>().radius;
+
+        minDistance = gameObject.GetComponentInParent<BoxCollider>().size.x;
+
     }
 
-    
+
     void Update()
     {
-        distance = Vector3.Distance(cubePos.position, playerPos.position);
-        Debug.Log(distance);
-    }
+        playerPosition = playerTransform.position;
+        distance = Vector3.Distance(cubePos.position, playerPosition);
 
-    void OnTriggerStay(Collider collision)
-    {
-      if(collision.gameObject.tag == "Player")
+        if (gm.alarmMode)
         {
-
-
-            // rendCube.material.color = Color.Lerp(startColor, endColor, distance);
-            //Debug.Log(cubePos.position);
-            //Debug.Log(playerPos.position);
-
-
-            float distanceApart = getSqrDistance(cubePos.position, playerPos.position);
-           
-
-            //Convert 0 and 200 distance range to 0f and 1f range
-            float lerp = mapValue(distanceApart, 0, MaxDistance, 0f, 1f);
-
-            //Lerp Color between near and far color
-            Color lerpColor = Color.Lerp(startColor, endColor, lerp);
-            cubePos.GetComponent<Renderer>().material.color = lerpColor;
-
+            lerp = 1;
+        }
+        else
+        {
+            if (distance > maxDistance)
+            {
+                lerp = 0;
+            }
+            else if (distance <= 1)
+            {
+                lerp = 1;
+            }
+            else
+            {
+                lerp = 1 - ((distance - minDistance) / (maxDistance - minDistance));
+            }
         }
 
-    }
-
-    public float getSqrDistance(Vector3 v1, Vector3 v2)
-    {
-        return (v1 - v2).sqrMagnitude;
-    }
-
-    float mapValue(float mainValue, float inValueMin, float inValueMax, float outValueMin, float outValueMax)
-    {
-        return (mainValue - inValueMin) * (outValueMax - outValueMin) / (inValueMax - inValueMin) + outValueMin;
+        cubePos.GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, lerp);
     }
 }

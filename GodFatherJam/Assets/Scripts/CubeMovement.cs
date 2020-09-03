@@ -59,10 +59,6 @@ public class CubeMovement : MonoBehaviour
             StartCoroutine("alarmMode");
         }
     }
-    void FixedUpdate()
-    {
-
-    }
 
     IEnumerator moveUp()
     {
@@ -72,13 +68,7 @@ public class CubeMovement : MonoBehaviour
             entity.transform.RotateAround(up.transform.position, Vector3.right, step);
             yield return new WaitForSeconds(rotationSpeed);
         }
-        
-
         center.transform.position = entity.transform.position;
-
-
-        
-
     }
 
     IEnumerator moveDown()
@@ -89,8 +79,6 @@ public class CubeMovement : MonoBehaviour
             yield return new WaitForSeconds(rotationSpeed);
         }
         center.transform.position = entity.transform.position;
-
-        
     }
 
     IEnumerator moveLeft()
@@ -101,8 +89,6 @@ public class CubeMovement : MonoBehaviour
             yield return new WaitForSeconds(rotationSpeed);
         }
         center.transform.position = entity.transform.position;
-
-        
     }
 
     IEnumerator moveRight()
@@ -113,8 +99,6 @@ public class CubeMovement : MonoBehaviour
             yield return new WaitForSeconds(rotationSpeed);
         }
         center.transform.position = entity.transform.position;
-
-        
     }
 
     IEnumerator Pathing()
@@ -168,10 +152,7 @@ public class CubeMovement : MonoBehaviour
     IEnumerator alarmMode()
     {
         if(isAlarmModeEnabled)
-        { 
-            Debug.Log("in alarm");
-            // Everything that is alarm-related goes here
-            
+        {             
             GameObject[] cubeArray = GameObject.FindGameObjectsWithTag("Enemy");
             Color actualColor = cubeArray[0].GetComponent<Renderer>().material.color;
 
@@ -180,8 +161,6 @@ public class CubeMovement : MonoBehaviour
                 cube.GetComponent<Renderer>().material.color = new Color(1, 0, 0);
                 cube.GetComponent<CubeMovement>().cubeSpeed /= 3.0f;
             }
-
-
 
             yield return new WaitForSeconds(alarmDuration);
 
