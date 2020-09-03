@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+
+    public static bool alarmMode = false;
     #endregion
 
     void PlayPause()
