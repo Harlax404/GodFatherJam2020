@@ -21,6 +21,8 @@ public class TestPostPro : MonoBehaviour
 
     [SerializeField]
     private AudioClip PoliceSirens;
+    [SerializeField]
+    private AudioClip HeartBeat;
     private AudioSource JudgementSource;
 
     void Start()
@@ -43,7 +45,7 @@ public class TestPostPro : MonoBehaviour
             IshIsh();
         }
 
-        if (Input.GetKey(KeyCode.DownArrow) && PPIntesity > 0)
+        if (Input.GetKey(KeyCode.DownArrow) && PPIntesity >= 0)
         {
             PPIntesity -= 0.01f;
             IshIsh();
@@ -67,7 +69,15 @@ public class TestPostPro : MonoBehaviour
     {
         JudgementSource.volume = ModifIntensity; 
 
-        if(JudgementSource.isPlaying == false)
-        JudgementSource.PlayOneShot(PoliceSirens);
+        if(!JudgementSource.isPlaying)
+        {
+            JudgementSource.PlayOneShot(PoliceSirens);
+            JudgementSource.PlayOneShot(HeartBeat);
+        }
+
+        if(JudgementSource.isPlaying && PPIntesity == 0)
+        {
+            JudgementSource.Stop();
+        }
     }
 }
