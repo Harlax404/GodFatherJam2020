@@ -60,7 +60,7 @@ public class Mirador : MonoBehaviour
         while (elapsed < timeToLookAtPlayer + durationToLookAtPlayer)
         {
             Vector3 direction = character.position - transform.position;
-            Debug.Log(character.position);
+            //Debug.Log(character.position);
             rotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Lerp(current, rotation, elapsed / timeToLookAtPlayer);
             elapsed += Time.deltaTime;
