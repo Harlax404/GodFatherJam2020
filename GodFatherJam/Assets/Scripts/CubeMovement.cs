@@ -30,14 +30,14 @@ public class CubeMovement : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> controlPoints = new List<GameObject>();
-    private GameObject[] cubeArray;
+    
     // Start is called before the first frame update
     void Start()
     {
         gm = GameManager.Instance;
       
 
-        StartCoroutine("Pathing");
+       // StartCoroutine("Pathing");
         
     }
 
@@ -46,6 +46,7 @@ public class CubeMovement : MonoBehaviour
 
         if (c.gameObject.tag == "Player")
         {
+            Debug.Log("OncollisionEnter");
             gm.alarmMode = true;
             Vector3 dir = c.contacts[0].point - transform.position;
 
@@ -165,11 +166,11 @@ public class CubeMovement : MonoBehaviour
     IEnumerator alarmMode()
     {
         if(isAlarmModeEnabled)
-        {
+        { 
             Debug.Log("in alarm");
             // Everything that is alarm-related goes here
             
-
+            GameObject[] cubeArray = GameObject.FindGameObjectsWithTag("Enemy");
             Color actualColor = cubeArray[0].GetComponent<Renderer>().material.color;
 
             foreach (GameObject cube in cubeArray)

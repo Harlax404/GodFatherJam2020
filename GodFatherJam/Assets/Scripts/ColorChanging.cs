@@ -6,15 +6,16 @@ public class ColorChanging : MonoBehaviour
 {
     public Color startColor;
     public Color endColor;
+    public Renderer rendCube;
     public Transform playerPos;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
@@ -26,10 +27,12 @@ public class ColorChanging : MonoBehaviour
         {
             
             float distance = Vector3.Distance(transform.position,playerPos.position);
-            Color.Lerp(startColor, endColor,distance);//, différence de distance);
+            rendCube.material.color = Color.Lerp(startColor, endColor, Mathf.PingPong(Time.time, 1));
+
+            Debug.Log("OnTriggerStay");
         }
 
-        // sauvegarder sa position pour faire un check de distance
+
 
         // Color lerp
     }
