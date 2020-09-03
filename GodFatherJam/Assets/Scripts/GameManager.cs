@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public bool alarmMode = false;
     #endregion
 
-    void PlayPause()
+     public void PlayPause()
     {
         // to do : mettre le jeu en pause et le relancer
             pauseMenuUI.SetActive(true);
