@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         //Pause
         if (_mainPlayer.GetButtonDown("Pause"))
         {
-            //to do : mettre playpause en public.  gameManager.PlayPause();
+            gameManager.PlayPause();
         }
 
         float dirX = _mainPlayer.GetAxis("MoveHorizontal");
