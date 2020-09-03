@@ -37,7 +37,7 @@ public class CubeMovement : MonoBehaviour
         gm = GameManager.Instance;
       
 
-       // StartCoroutine("Pathing");
+        StartCoroutine("Pathing");
         
     }
 
@@ -52,7 +52,8 @@ public class CubeMovement : MonoBehaviour
 
             dir = -dir.normalized;
 
-            GetComponent<Rigidbody>().AddForce(dir * collisionForce);
+            //c.gameObject.GetComponent<Rigidbody>().AddForce(dir * collisionForce);
+            //GetComponent<Rigidbody>().AddForce(dir * collisionForce);
 
             StartCoroutine("alarmMode");
         }
