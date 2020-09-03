@@ -213,6 +213,16 @@ PrefabInstance:
       propertyPath: controlPoints.Array.data[3]
       value: 
       objectReference: {fileID: 926579386}
+    - target: {fileID: 4781029530610402371, guid: 26b1ea3b7f13f1d4888114ff7c252a6c,
+        type: 3}
+      propertyPath: collisionForce
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4781029530610402368, guid: 26b1ea3b7f13f1d4888114ff7c252a6c,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26b1ea3b7f13f1d4888114ff7c252a6c, type: 3}
 --- !u!1 &477717603

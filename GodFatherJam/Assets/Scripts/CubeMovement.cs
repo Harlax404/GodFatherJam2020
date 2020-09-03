@@ -41,18 +41,19 @@ public class CubeMovement : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision c)
+    void OnTriggerEnter(Collider c)
     {    
 
         if (c.gameObject.tag == "Player")
         {
             Debug.Log("OncollisionEnter");
             gm.alarmMode = true;
-            Vector3 dir = c.contacts[0].point - transform.position;
+            Vector3 dir = c.gameObject.transform.position - transform.position;
+            dir.y = 0.1f;
 
-            dir = -dir.normalized;
-
-            //c.gameObject.GetComponent<Rigidbody>().AddForce(dir * collisionForce);
+            //dir = -dir.normalized;
+            Debug.Log(dir);
+            c.gameObject.GetComponent<Rigidbody>().AddForce(dir * collisionForce);
             //GetComponent<Rigidbody>().AddForce(dir * collisionForce);
 
             StartCoroutine("alarmMode");

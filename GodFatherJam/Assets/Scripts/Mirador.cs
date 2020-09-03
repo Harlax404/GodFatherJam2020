@@ -67,7 +67,7 @@ public class Mirador : MonoBehaviour
         float elapsed2 = 0f;
         while (elapsed2 < timeToLookAtPlayer)
         {
-            Debug.Log("blabla " + elapsed2 + " " + (elapsed2/ timeToLookAtPlayer));
+            //Debug.Log("blabla " + elapsed2 + " " + (elapsed2/ timeToLookAtPlayer));
             transform.rotation = Quaternion.Lerp(rotation, current, elapsed2 / timeToLookAtPlayer);
             elapsed2 += Time.deltaTime;
             yield return null;
