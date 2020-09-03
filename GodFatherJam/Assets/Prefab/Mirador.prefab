@@ -200,7 +200,7 @@ MonoBehaviour:
   speed: 0.5
   durationToLookAtPlayer: 5
   timeToLookAtPlayer: 0.5
-  player: {fileID: 0}
+  player: {fileID: 1468760294434707351, guid: 1fdc9a14e42be3843a90597d503268d4, type: 3}
 --- !u!1 &7762980743580474769
 GameObject:
   m_ObjectHideFlags: 0
