@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 4781029530610402372}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,6 +348,7 @@ MonoBehaviour:
   step: 9
   rotationSpeed: 0.01
   cubeSpeed: 1
+  alarmDuration: 3
   collisionForce: 5
   controlPoints:
   - {fileID: 0}

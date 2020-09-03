@@ -22,7 +22,10 @@ public class CubeMovement : MonoBehaviour
 
     public float rotationSpeed = 0.01f;
     public float cubeSpeed = 1.0f;
+    public float alarmDuration = 3.0f;
     public float collisionForce = 5;
+
+    private GameManager gm;
 
     [SerializeField]
     private List<GameObject> controlPoints = new List<GameObject>();
@@ -30,25 +33,25 @@ public class CubeMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gm = GameManager.Instance;
+
         StartCoroutine("Pathing");
         
     }
 
     void OnCollisionEnter(Collision c)
-    {
-        // force is how forcefully we will push the player away from the enemy.
-       
+    {    
 
-        // If the object we hit is the enemy
         if (c.gameObject.tag == "Player")
         {
-            // Calculate Angle Between the collision point and the player
+            gm.alarmMode = true;
             Vector3 dir = c.contacts[0].point - transform.position;
-            // We then get the opposite (-Vector3) and normalize it
+
             dir = -dir.normalized;
-            // And finally we add force in the direction of dir and multiply it by force. 
-            // This will push back the player
+
             GetComponent<Rigidbody>().AddForce(dir * collisionForce);
+
+            StartCoroutine("alarmMode");
         }
     }
     void FixedUpdate()
@@ -169,6 +172,31 @@ public class CubeMovement : MonoBehaviour
         }
         StartCoroutine("Pathing");
        
+    }
+
+    IEnumerator alarmMode()
+    {
+        // Everything that is alarm-related goes here
+        GameObject[] cubeArray = GameObject.FindGameObjectsWithTag("Enemy");
+
+        Color actualColor = cubeArray[0].GetComponent<Renderer>().material.color;
+
+        foreach (GameObject cube in cubeArray)
+        {
+            cube.GetComponent<Renderer>().material.color = new Color(1,0,0);
+            cube.GetComponent<CubeMovement>().cubeSpeed *= 1.25f; 
+        }
+
+
+
+        yield return new WaitForSeconds(alarmDuration);
+
+        foreach (GameObject cube in cubeArray)
+        {
+            cube.GetComponent<Renderer>().material.color = actualColor;
+        }
+
+        gm.alarmMode = false;
     }
     
 }
