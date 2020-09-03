@@ -25,17 +25,23 @@ public class ColorChanging : MonoBehaviour
         gm = GameManager.Instance;
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         //playerTransform = playerPos.GetChild(0).transform;
-        maxDistance = GetComponent<SphereCollider>().radius;
+        maxDistance = GetComponent<SphereCollider>().radius * transform.lossyScale.x;
 
         minDistance = gameObject.GetComponentInParent<BoxCollider>().size.x;
-
     }
 
 
     void Update()
     {
+        Vector3 cubePosition;
+        cubePosition = cubePos.position;
+        cubePosition.y = 0;
         playerPosition = playerPos.position;
-        distance = Vector3.Distance(cubePos.position, playerPosition);
+        playerPosition.y = 0;
+        distance = Vector3.Distance(cubePosition, playerPosition);
+        Debug.Log("distance = " + distance);
+        Debug.Log("cube = " + cubePosition);
+        Debug.Log("playerPosition = " + playerPosition);
 
         if (gm.alarmMode)
         {
@@ -47,7 +53,7 @@ public class ColorChanging : MonoBehaviour
             {
                 lerp = 0;
             }
-            else if (distance <= 1)
+            else if (distance <= minDistance)
             {
                 lerp = 1;
             }
