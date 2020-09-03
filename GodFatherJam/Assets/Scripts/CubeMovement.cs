@@ -27,6 +27,7 @@ public class CubeMovement : MonoBehaviour
     public float collisionForce = 5;
 
     private GameManager gm;
+    private bool hitOnce = false;
 
     [SerializeField]
     private List<GameObject> controlPoints = new List<GameObject>();
@@ -44,8 +45,9 @@ public class CubeMovement : MonoBehaviour
     void OnTriggerEnter(Collider c)
     {
         //Debug.Log("A touché");
-        if (c.gameObject.tag == "Player")
+        if (c.gameObject.tag == "Player" && !hitOnce)
         {
+            hitOnce = true;
             //Debug.Log("C'est le joueur");
             gm.alarmMode = true;
             Vector3 dir = c.gameObject.transform.position - transform.position;
@@ -171,6 +173,7 @@ public class CubeMovement : MonoBehaviour
             }
 
             gm.alarmMode = false;
+            hitOnce = false;
         }
        
     }

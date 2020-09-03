@@ -18,13 +18,15 @@ public class Mirador : MonoBehaviour
 
     public float durationToLookAtPlayer = 5f;
     public float timeToLookAtPlayer = 0.5f;
-    public Transform player;
+    //public Transform player;
+    private Transform character;
 
     private GameManager gm; // pour récup arlarmMode
 
     // Start is called before the first frame update
     void Start()
     {
+        character = GameObject.FindGameObjectWithTag("Player").transform;
         gm = GameManager.Instance;
         from = transform.rotation;
         current = transform.rotation;
@@ -57,7 +59,8 @@ public class Mirador : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < timeToLookAtPlayer + durationToLookAtPlayer)
         {
-            Vector3 direction = player.position - transform.position;
+            Vector3 direction = character.position - transform.position;
+            Debug.Log(character.position);
             rotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Lerp(current, rotation, elapsed / timeToLookAtPlayer);
             elapsed += Time.deltaTime;
@@ -67,7 +70,6 @@ public class Mirador : MonoBehaviour
         float elapsed2 = 0f;
         while (elapsed2 < timeToLookAtPlayer)
         {
-            //Debug.Log("blabla " + elapsed2 + " " + (elapsed2/ timeToLookAtPlayer));
             transform.rotation = Quaternion.Lerp(rotation, current, elapsed2 / timeToLookAtPlayer);
             elapsed2 += Time.deltaTime;
             yield return null;
