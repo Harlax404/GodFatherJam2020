@@ -39,9 +39,6 @@ public class ColorChanging : MonoBehaviour
         playerPosition = playerPos.position;
         playerPosition.y = 0;
         distance = Vector3.Distance(cubePosition, playerPosition);
-        Debug.Log("distance = " + distance);
-        Debug.Log("cube = " + cubePosition);
-        Debug.Log("playerPosition = " + playerPosition);
 
         if (gm.alarmMode)
         {
