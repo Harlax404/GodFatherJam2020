@@ -80,18 +80,18 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                PlayPause();
-            }
-        }
-    }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Escape))
+    //    {
+    //        if (GameIsPaused)
+    //        {
+    //            Resume();
+    //        }
+    //        else
+    //        {
+    //            PlayPause();
+    //        }
+    //    }
+    //}
 }
