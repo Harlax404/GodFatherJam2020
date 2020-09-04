@@ -22,11 +22,13 @@ public class Mirador : MonoBehaviour
     private Transform character;
 
     private GameManager gm; // pour récup arlarmMode
+    private AudioSource alarmSound;
 
     // Start is called before the first frame update
     void Start()
     {
         character = GameObject.FindGameObjectWithTag("Player").transform;
+        alarmSound = GetComponent<AudioSource>();
         gm = GameManager.Instance;
         from = transform.rotation;
         current = transform.rotation;
@@ -52,6 +54,7 @@ public class Mirador : MonoBehaviour
 
     IEnumerator LookAtPlayer()
     {
+        alarmSound.Play();
         inAlert = true;
         current = transform.rotation;
         Quaternion rotation = Quaternion.identity;
