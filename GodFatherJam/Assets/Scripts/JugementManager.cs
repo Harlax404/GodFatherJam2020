@@ -53,15 +53,15 @@ public class JugementManager : MonoBehaviour
         if (gm.alarmMode)
         {
             // Jugement à 1 en lerp
-            postProcessGo.GetComponent<TestPostPro>().PPIntesity = Mathf.Lerp(intensityBackUp, 0.8f, petitLerp);
+            /*postProcessGo.GetComponent<TestPostPro>().PPIntesity = Mathf.Lerp(intensityBackUp, 0.8f, petitLerp);
             //Debug.Log("Pp = "+ postProcessGo.GetComponent<TestPostPro>().PPIntesity);
             petitLerp += 0.01f;
             postAlarm = true;
-            Debug.Log("in alarm");
+            Debug.Log("in alarm");*/
         }
         else
         {
-            if(postProcessGo.GetComponent<TestPostPro>().PPIntesity == 0.8f) petitLerp = 0.1f;
+            /*if(postProcessGo.GetComponent<TestPostPro>().PPIntesity == 0.8f) petitLerp = 0.1f;
 
             if (postAlarm && !gm.alarmMode)
             {
@@ -84,16 +84,16 @@ public class JugementManager : MonoBehaviour
             else
             {
                 lerp = 1 - ((distance - minDistance) / (maxDistance - minDistance));
-            }
+            }*/
         }
         //Debug.Log(lerp);
-        if(!gm.alarmMode && !postAlarm)
+        /*if(!gm.alarmMode && !postAlarm)
         {
             Debug.Log("rentre pas ici");
             intensityBackUp = postProcessGo.GetComponent<TestPostPro>().PPIntesity;
             postProcessGo.GetComponent<TestPostPro>().PPIntesity = Mathf.Lerp(borneMinJudgement, borneMaxJudgement, lerp);
         }
         
-        postProcessGo.GetComponent<TestPostPro>().IshIsh();
+        postProcessGo.GetComponent<TestPostPro>().IshIsh();*/
     }
 }
