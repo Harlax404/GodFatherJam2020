@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8513d6ed2d1b52b4b94a806ebbce8657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuitTimer: 20
+  QuitTimer: 10
 --- !u!4 &338092716
 Transform:
   m_ObjectHideFlags: 0

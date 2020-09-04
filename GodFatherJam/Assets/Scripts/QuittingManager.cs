@@ -11,7 +11,7 @@ public class QuittingManager : MonoBehaviour
     {
         QuitTimer -= Time.deltaTime;
 
-        if (QuitTimer <= 0 && Input.anyKeyDown)
+        if (QuitTimer <= 0 || Input.anyKeyDown)
             Application.Quit();
     }
 }
