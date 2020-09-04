@@ -23,18 +23,18 @@ public class TestPostPro : MonoBehaviour
     private AudioClip PoliceSirens;
     [SerializeField]
     private AudioClip HeartBeat;
-    private AudioSource JudgementSource;
+    public AudioSource JudgementSource;
 
     void Start()
     {
         GameObject VolumeHolder = Camera.main.gameObject;
+        JudgementSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        Debug.Log(JudgementSource.gameObject);
 
         PostProcessVolume volume = VolumeHolder.GetComponent<PostProcessVolume>();
         PPVignette = volume.profile.GetSetting<Vignette>();
         PPField = volume.profile.GetSetting<DepthOfField>();
         PPBloom = volume.profile.GetSetting<Bloom>();
-
-        JudgementSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -68,7 +68,8 @@ public class TestPostPro : MonoBehaviour
 
     private void PlaySirens(float ModifIntensity)
     {
-        JudgementSource.volume = ModifIntensity; 
+        JudgementSource.volume = ModifIntensity;
+        Debug.Log(JudgementSource.gameObject);
 
         if(!JudgementSource.isPlaying)
         {
