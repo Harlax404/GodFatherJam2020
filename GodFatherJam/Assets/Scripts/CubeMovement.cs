@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CubeMovement : MonoBehaviour
 {
-        
-    
-
     public GameObject entity;
 
     public GameObject center;
@@ -20,6 +17,7 @@ public class CubeMovement : MonoBehaviour
     public SphereCollider cubeVisionCollider;
     public int step = 9;
 
+    public float speedMultiplier = 3f;
     public float rotationSpeed = 0.01f;
     public float cubeSpeed = 1.0f;
     public bool isAlarmModeEnabled = true;
@@ -31,16 +29,39 @@ public class CubeMovement : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> controlPoints = new List<GameObject>();
+
+    private AudioSource soundStep;
+    //private float timer = 0f;
     
     // Start is called before the first frame update
     void Start()
     {
+        soundStep = GetComponent<AudioSource>();
         gm = GameManager.Instance;
         alarmDuration = gm.alarmDuration;
 
         StartCoroutine("Pathing");
         
     }
+    //private void Update()
+    //{
+    //    timer += Time.deltaTime;
+    //    if (!gm.alarmMode)
+    //    {
+    //        if (timer >= cubeSpeed)
+    //        {
+    //            Debug.Log("Sound");
+    //            timer = 0f;
+    //            soundStep.Play();
+    //        }
+    //    }
+    //    else if (timer >= 2* cubeSpeed / speedMultiplier)
+    //    {
+    //        Debug.Log("Sound venere");
+    //        timer = 0f;
+    //        soundStep.Play();
+    //    }
+    //}
 
     void OnTriggerEnter(Collider c)
     {
@@ -143,7 +164,7 @@ public class CubeMovement : MonoBehaviour
                     //Debug.Log("goes right");
                     StartCoroutine("moveRight");
                 }
-
+                soundStep.Play();
                 yield return new WaitForSeconds(cubeSpeed);
 
                 offset = controlPoints[i2].transform.position - transform.position;
