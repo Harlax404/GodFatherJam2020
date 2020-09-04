@@ -60,8 +60,11 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         //to do : quitter le jeu
-        Application.Quit();
-        Debug.Log("quit");
+        //Debug.Log("quit");
+        //Application.Quit();
+        // afficher les crédits
+        SceneManager.LoadScene("Credits");
+
     }
 
     public void Restart()
