@@ -29,7 +29,6 @@ public class TestPostPro : MonoBehaviour
     {
         GameObject VolumeHolder = Camera.main.gameObject;
         JudgementSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
-        Debug.Log(JudgementSource.gameObject);
 
         PostProcessVolume volume = VolumeHolder.GetComponent<PostProcessVolume>();
         PPVignette = volume.profile.GetSetting<Vignette>();
@@ -69,7 +68,6 @@ public class TestPostPro : MonoBehaviour
     private void PlaySirens(float ModifIntensity)
     {
         JudgementSource.volume = ModifIntensity;
-        Debug.Log(JudgementSource.gameObject);
 
         if(!JudgementSource.isPlaying)
         {
