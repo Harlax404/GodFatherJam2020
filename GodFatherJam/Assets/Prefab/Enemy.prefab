@@ -61,6 +61,7 @@ MonoBehaviour:
   borneMaxJudgement: 0.5
   playerPos: {fileID: 0}
   cubePos: {fileID: 4781029530610402375}
+  intensityvignette: 0.4
 --- !u!1 &4781029529058185471
 GameObject:
   m_ObjectHideFlags: 0
