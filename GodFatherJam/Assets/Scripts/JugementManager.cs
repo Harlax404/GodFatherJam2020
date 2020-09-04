@@ -26,6 +26,8 @@ public class JugementManager : MonoBehaviour
     private float intensityBackUp;
     private bool postAlarm = false;
 
+    public float intensityvignette = 0.8f;
+
     void Start()
     {
         gm = GameManager.Instance;
@@ -53,7 +55,7 @@ public class JugementManager : MonoBehaviour
         if (gm.alarmMode)
         {
             // Jugement à 1 en lerp
-            postProcessGo.GetComponent<TestPostPro>().PPIntesity = Mathf.Lerp(intensityBackUp, 0.8f, petitLerp);
+            postProcessGo.GetComponent<TestPostPro>().PPIntesity = Mathf.Lerp(intensityBackUp, intensityvignette, petitLerp);
             //Debug.Log("Pp = "+ postProcessGo.GetComponent<TestPostPro>().PPIntesity);
             petitLerp += 0.01f;
             postAlarm = true;
@@ -65,7 +67,7 @@ public class JugementManager : MonoBehaviour
 
             if (postAlarm && !gm.alarmMode)
             {
-                postProcessGo.GetComponent<TestPostPro>().PPIntesity = Mathf.Lerp(0.8f, intensityBackUp, petitLerp);
+                postProcessGo.GetComponent<TestPostPro>().PPIntesity = Mathf.Lerp(intensityvignette, intensityBackUp, petitLerp);
                 petitLerp += 0.005f;
 
                 if (postProcessGo.GetComponent<TestPostPro>().PPIntesity <= intensityBackUp + 0.01f) postAlarm = false;
