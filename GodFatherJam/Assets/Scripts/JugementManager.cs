@@ -26,13 +26,6 @@ public class JugementManager : MonoBehaviour
     private float intensityBackUp;
     private bool postAlarm = false;
 
-    private GameObject[] cubeArray;
-    private float previousDistance;
-    private float nextDistance;
-    private float closerCubeDistance;
-
-
-
     void Start()
     {
         gm = GameManager.Instance;
@@ -47,7 +40,7 @@ public class JugementManager : MonoBehaviour
         maxDistance = GetComponent<SphereCollider>().radius;
 
 
-        cubeArray = GameObject.FindGameObjectsWithTag("Enemy");
+       
     }
 
     void Update()

@@ -38,7 +38,7 @@ public class CubeMovement : MonoBehaviour
         gm = GameManager.Instance;
         alarmDuration = gm.alarmDuration;
 
-        //StartCoroutine("Pathing");
+        StartCoroutine("Pathing");
         
     }
 
